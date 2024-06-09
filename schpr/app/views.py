@@ -6,7 +6,10 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+
 from app.models import Applications, Blog
+from app.serializers import BlogModelSerializer
 
 
 def index(request):
@@ -36,6 +39,7 @@ class ApplicationAddView(CreateView):
     template_name = 'app/addApplications.html'
     success_url = reverse_lazy('app:index')
 
+
 def show_blogs(request):
     context = {
         'blogs': Blog.objects.all()
@@ -43,3 +47,12 @@ def show_blogs(request):
     return render(request, 'app/show_blogs.html', context)
 
 
+# API Views
+class BlogListAPIView(ListCreateAPIView):
+    queryset = Blog.objects.all()
+    serializer_class = BlogModelSerializer
+
+
+class BlogRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = Blog.objects.all()
+    serializer_class = BlogModelSerializer

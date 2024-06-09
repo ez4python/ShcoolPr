@@ -1,6 +1,7 @@
-from django.urls import path, include
+from django.urls import path
 
-from app.views import index, RegisterUser, UserLoginView, logout_user, ApplicationAddView, show_blogs
+from app.views import index, RegisterUser, UserLoginView, logout_user, ApplicationAddView, show_blogs, \
+    BlogListAPIView, BlogRetrieveUpdateDestroyAPIView
 
 app_name = 'app'
 
@@ -9,9 +10,12 @@ urlpatterns = [
 
     path('add/', ApplicationAddView.as_view(), name='addApp'),
     path('blogs/', show_blogs, name='showblog'),
-
     path('register/', RegisterUser.as_view(), name='regis'),
     path('login/', UserLoginView.as_view(), name='login'),
     path('logout/', logout_user, name='logout'),
 ]
 
+urlpatterns += [
+    path('api-blogs/', BlogListAPIView.as_view(), name='lc_api_view'),
+    path('api-blog/<int:pk>', BlogRetrieveUpdateDestroyAPIView.as_view(), name='rud_api_view'),
+]
