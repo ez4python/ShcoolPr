@@ -1,7 +1,7 @@
 from django.urls import path
 
 from app.views import index, RegisterUser, UserLoginView, logout_user, ApplicationAddView, show_blogs, \
-    BlogListAPIView, BlogRetrieveUpdateDestroyAPIView
+    BlogListAPIView, BlogRetrieveUpdateDestroyAPIView, ApplicationCreateAPIView
 
 app_name = 'app'
 
@@ -18,4 +18,5 @@ urlpatterns = [
 urlpatterns += [
     path('api-blogs/', BlogListAPIView.as_view(), name='lc_api_view'),
     path('api-blog/<int:pk>', BlogRetrieveUpdateDestroyAPIView.as_view(), name='rud_api_view'),
+    path('api-add/', ApplicationCreateAPIView.as_view(), name='app_list_create_api_view')
 ]

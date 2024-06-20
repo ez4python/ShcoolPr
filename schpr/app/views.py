@@ -6,10 +6,10 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView
 
 from app.models import Applications, Blog
-from app.serializers import BlogModelSerializer
+from app.serializers import BlogModelSerializer, ApplicationModelSerializer
 
 
 def index(request):
@@ -56,3 +56,10 @@ class BlogListAPIView(ListCreateAPIView):
 class BlogRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogModelSerializer
+
+
+class ApplicationCreateAPIView(ListCreateAPIView):
+    queryset = Applications.objects.all()
+    serializer_class = ApplicationModelSerializer
+
+
